@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { useRef } from "react"
-import { axiosClient } from "../axios-client.js"
-import { useStateContext } from "../context/ContextProvider.jsx"
+import  axiosClient  from "../axios-client.js"
+import { useStateContext } from "../contexts/ContextProvider.jsx"
 
 export default function Signup() {
     const nameRef = useRef()
@@ -41,7 +41,7 @@ export default function Signup() {
                     <input ref={emailRef} type="email" placeholder="Email"/>
                     <input ref={passwordRef} type="password" placeholder="Password"/>
                     <input ref={passwordConfirmationRef} type="password" placeholder="Confirm Password"/>
-                    <button className="btn btn-block">Sign in</button>
+                    <button className="btn btn-block">Sign up</button>
                     <p className="message">
                         Already have an account?<Link to="/login"> Sign in</Link>
                         </p>
