@@ -16,11 +16,12 @@ class AuthController extends Controller
         if (!Auth::attempt($credentials)) {
             return response([
                 'message' => 'Provided credentials are incorrect'
-            ]);
+            ], 401);
         }
         /** @var User $user */
         $user = Auth::user();
-        $user->createToken('main')->plainTextToken;
+        $token = $user->createToken('main')->plainTextToken;
+        return response(compact('user', 'token'));
     }
     
     public function signup(SignupRequest $request)
@@ -30,7 +31,7 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password'])
+            'password' => $data['password'] // Let the 'hashed' cast handle hashing
         ]);
 
         $token = $user->createToken('main')->plainTextToken;
